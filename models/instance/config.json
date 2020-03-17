@@ -1,0 +1,14 @@
+{
+  "client-config": {
+    "client-id": "",
+    "client-secret": ""
+  },
+  "user-config": {
+    "username": "username",
+    "password": "password"
+  },
+  "redirect-uri": "",
+  "headers": {
+    "User-Agent": "Reddit Save Manager by /u/username"
+  }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Reddit-Saves</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/10.0.0/markdown-it.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <h1>Reddit-Saves</h1>
+        <ul>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+          <li>
+            <a href="/sync">Sync</a>
+          </li>
+          <li>
+            <a href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="container">
+      <div class="search-container">
+        <form
+          id="search-form"
+          action="/api/get_saved"
+          method="GET"
+        >
+          <div class="search-box">
+            <input type="text" id="search" placeholder="search" name="search" />
+          </div>
+          <div class="search-advanced">
+            <h4>Type</h4>
+            <fieldset id="save-type">
+              <input type="radio" name="save-type" value="post" /><label
+                >Post</label
+              >
+              <input type="radio" name="save-type" value="comment" /><label
+                >Comment</label
+              >
+              <input type="radio" name="save-type" value="any" checked /><label
+                >Any</label
+              >
+            </fieldset>
+            <h4>Limit</h4>
+            <fieldset id="limit">
+              <input type="radio" name="limit" value="10" /><label>10</label>
+              <input type="radio" name="limit" value="25" checked /><label
+                >25</label
+              >
+              <input type="radio" name="limit" value="50" /><label>50</label>
+            </fieldset>
+            <h4>Tags</h4>
+            <input list="tagsList" id="tagInput" />
+            <datalist id="tagsList">
+              <option data-value="placeholder">placeholder</option>
+            </datalist>
+            <input type="hidden" name="tags" id="tagInputHidden" />
+            <h4>Subreddit</h4>
+            <input type="text" name="subreddit" id="subreddit" />
+            <input type="text" name="user" id="user" />
+          </div>
+          <button class="nav-button" id="submit">Submit</button>
+        </form>
+        <form id="add-tag-form" action="/api/add_tag" method="GET">
+          <input type="text" id="tag-name" name="tag-name">
+          <button class="nav-button" id="add-tag-button">Add Tag</button>
+        </form>
+      </div>
+      <section class="gallery">
+        <div class="results">
+          <h4>
+            Results: <span id="currentCount">0</span> out of
+            <span id="totalCount">0</span>
+          </h4>
+        </div>
+        <div class="nav-button-container">
+          <button class="nav-button prev">prev</button>
+          <button class="nav-button next">next</button>
+        </div>
+        <div class="cards-container"></div>
+        <div class="nav-button-container">
+          <button class="nav-button prev">prev</button>
+          <button class="nav-button next">next</button>
+        </div>
+      </section>
+    </div>
+    <script src="../static/js/card.js"></script>
+  </body>
+</html>

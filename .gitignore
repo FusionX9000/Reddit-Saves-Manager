@@ -106,3 +106,5 @@ redditenv/
 .vscode/
 
 models/sync/
+
+development_playground.py

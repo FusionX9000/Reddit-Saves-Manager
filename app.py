@@ -6,15 +6,13 @@ from flask import Flask, render_template, request, redirect, url_for, current_ap
 from flask_cors import CORS
 
 from config import GRANT_TYPE, SCOPE_STRING, DURATION, RESPONSE_TYPE, AUTH_ENDPOINT, TOKEN_ENDPOINT
-from instance.config import CLIENT_ID, CLIENT_SECRET, URI, USER_AGENT
+from instance.config import CLIENT_ID, CLIENT_SECRET, URI, USER_AGENT, PLACEHOLDER_USERNAME
 from models import RedditAPI
 from models.InterfaceDB import InterfaceDB
 
 app = Flask(__name__)
 
 cors = CORS(app)
-
-PLACEHOLDER_USERNAME = "username"
 
 @app.route('/login')
 def login():

@@ -124,7 +124,7 @@ class DB:
 
     def insert(self, table, params, returning=False):
         query = self.getInsertQuery(table, params.keys(), returning)
-        print(query.as_string)
+        # print(query.as_string)
         try:
             self.cursor.execute(query, tuple(params.values()))
             returned = self.cursor.fetchone()["id"] if returning else None

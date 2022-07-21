@@ -27,6 +27,7 @@ CREATE TABLE user_saves
     user_id BIGINT NOT NULL REFERENCES users(id),
     save_id BIGINT NOT NULL REFERENCES saves(id),
     saved BOOLEAN NOT NULL,
+    saved_utc TIMESTAMP DEFAULT timezone('utc',now()),
     UNIQUE(user_id,save_id)
 );
 

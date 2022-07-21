@@ -88,7 +88,7 @@ class InterfaceDB:
             for child in reversed(children):
                 save_params = self.getParams(child)
 
-                # print(save_params["saves"]["link_title"])
+                print(save_params["saves"]["link_title"])
                 # unique key for save
                 self.addSave(user_id, save_params)
 
@@ -117,7 +117,7 @@ class InterfaceDB:
             elif(kind == "t1"):
                 table_type = "comments"
                 params[table_type]["save_id"] = save_id
-
+            print(params["saves"]["link_title"])
             self.db.insert(table_type, params[table_type])
 
         else:
@@ -139,15 +139,15 @@ class InterfaceDB:
         base = Path(path)
 
         listings = list()
-        for file in self.getJsonList(path):
+        for file in sorted(self.getJsonList(path)):
             base_file = base / file
             with base_file.open('r') as f:
                 listings.append(json.load(f))
             if not persist:
-                base_file.remove()
+                base_file.unlink()
         self.addListings(user_id, listings)
 
-    def sync(self, reddit, limit=50, path=SAVES_SYNC_PATH, persist=False):
+    def sync(self, reddit, limit=50, path=SAVES_SYNC_PATH, persist=True):
         user = reddit.username
 
         user_id = self.getUserID(user)
@@ -164,7 +164,7 @@ class InterfaceDB:
             if limit <= 100:
                 listings = [reddit.get_saved(limit=limit)]
             else:
-                listings = reddit.download_saved(limit=limit, path=path)
+                listings = reddit.download_saved(limit=limit, path=path, persist=persist)
             self.addListings(user_id, listings)
 
     def userExists(self, user):
